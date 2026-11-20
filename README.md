@@ -3,7 +3,7 @@
 
 
 ## Introduction
-    The LCA team manages a Linux cluster consisting of ten nodes (servers). They require a solution to record the hardware specifications of each node and monitor its resource usage. This project serves as a Minimum Viable Product (MVP) that addresses this requirement by initially monitoring one Linux server. The monitoring agent uses Bash scripts to collect hardware specifications, such as CPU information and total memory, as well as resource usage data, including CPU utilization, memory usage, and available disk space. Hardware information is collected during initial setup, while resource usage is collected every minute because resource utilization changes continuously. The collected information is stored in a centralized PostgreSQL database for future analysis. The technologies used in this project include Bash, PostgreSQL, Docker, Git, and Crontab.
+The LCA team manages a Linux cluster consisting of ten nodes (servers). They require a solution to record the hardware specifications of each node and monitor its resource usage. This project serves as a Minimum Viable Product (MVP) that addresses this requirement by initially monitoring one Linux server. The monitoring agent uses Bash scripts to collect hardware specifications, such as CPU information and total memory, as well as resource usage data, including CPU utilization, memory usage, and available disk space. Hardware information is collected during initial setup, while resource usage is collected every minute because resource utilization changes continuously. The collected information is stored in a centralized PostgreSQL database for future analysis. The technologies used in this project include Bash, PostgreSQL, Docker, Git, and Crontab.
 
 
 
@@ -76,30 +76,34 @@ collects the current usage information of the current node and insert it into th
 ### Database Modeling
 Describe the schema of each table using markdown table syntax (do not put any sql code)
 1. host_info
+   
 Collects hardware specifications and persists it in host_info table
-| Column | Data Type |
-| ------------- | -------------|
-| id            | serial |
-| hostname      | VARCHAR |
-| cpu_number    | INT2 |
-| cpu_architecture | VARCHAR |
-| cpu_model      | VARCHAR |
-| cpu_mhz         | FLOAT8|
-| l2_cache       | INT4|
-| "timestamp"    | TIMESTAMP |
-| total_mem      | INT4 |
+
+| Column            | Data Type |
+|-------------------|-----------|
+| id                | SERIAL    |
+| hostname          | VARCHAR   |
+| cpu_number        | INT2      |
+| cpu_architecture  | VARCHAR   |
+| cpu_model         | VARCHAR   |
+| cpu_mhz           | FLOAT8    |
+| l2_cache          | INT4      |
+| timestamp         | TIMESTAMP |
+| total_mem         | INT4      |
 
 2. host_usage
+   
 Collects hardware usage and persists it in host_usage table
-| Column | Data Type |
-| ------------- | -------------|
-| "timestamp"    | TIMESTAMP |
-|host_id       | SERIAL |
-| memory_free    | INT4 |
-| cpu_idle     |  INT2 |
-| cpu_kernel    | INT2 |
-| disk_io     |   INT4 |
-| disk_available | INT4 |
+
+| Column         | Data Type |
+|----------------|-----------|
+| timestamp      | TIMESTAMP |
+| host_id        | SERIAL    |
+| memory_free    | INT4      |
+| cpu_idle       | INT2      |
+| cpu_kernel     | INT2      |
+| disk_io        | INT4      |
+| disk_available | INT4      |
 
 
 ## Test
